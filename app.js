@@ -1,11 +1,7 @@
-import linechart from 'canvas-linechart';
+import linechart from './lib/linechart.js';
+import data from './data.js';
 
-const canvas = document.getElementById('canvas');
-
-const data = [
-	[1,1],
-	[2,2],
-	[3,3]
-];
-
-linechart(canvas, 400, 200, data, 1, {max: 10});
+window.drawChart = canvas => {
+	const {height, width} = canvas.getBoundingClientRect();
+	linechart(canvas, width, height, data.dailyInsider, data.snp, 1);
+};

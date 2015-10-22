@@ -1,8 +1,20 @@
+<!DOCTYPE html>
+<html>
 <head>
-
+	<style>
+	#canvas {
+		height: 180px;
+		width: 500px;
+	}
+	</style>
 </head>
 
 <body>
-<canvas id="canvas"/>
-<script src="build.js"/>
+<canvas id="canvas"></canvas>
+<script src="build.js"></script>
+<script>
+	var canvas = document.getElementById('canvas');
+	window.drawChart(canvas);
+</script>
 </body>
+</html>
