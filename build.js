@@ -62,7 +62,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _canvasLinechart2 = _interopRequireDefault(_canvasLinechart);
 
-	console.log(_canvasLinechart2['default']);
+	var canvas = document.getElementById('canvas');
+
+	var data = [[1, 1], [2, 2], [3, 3]];
+
+	(0, _canvasLinechart2['default'])(canvas, 400, 200, data, 1, { max: 10 });
 
 /***/ },
 /* 1 */
@@ -158,6 +162,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  var chartHeight = height - s(margin);
+	  var chartWidth = width - s(margin);
 
 	  var yScale = linearScale([util.min(values), util.max(values)], [chartHeight, margin]);
 
@@ -169,11 +174,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var ctx = c.getContext('2d');
 	  ctx.fillStyle = 'transparent';
 	  ctx.fillRect(0, 0, width, height);
-
+ 
 	  // draw [steps] axis ticks
 	  ctx.fillStyle = 'rgba(0,0,0,0.1)';
-	  for (var i = options.min; i <= options.max; i += options.tickSize) {
-	    ctx.fillRect(xScale(i), 0, s(2), chartHeight + margin);
+	  // for (var i = options.min; i <= options.max; i += options.tickSize) {
+	  //   ctx.fillRect(xScale(i), 0, s(2), chartHeight + margin);
+	  // }
+
+	   for (var i = util.min(values); i <= util.max(values); i += 0.5) {
+	    ctx.fillRect(0, yScale(i), chartWidth + margin, s(2));
 	  }
 
 	  if (typeof options.marker === 'number') {
@@ -201,26 +210,26 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  data.forEach(function (data) {
 	    // Draw circle
-	    ctx.beginPath();
-	    ctx.lineWidth = s(2);
-	    var r = s(3);
-	    if (data[2] && data[2].focus) {
-	      ctx.lineWidth = s(3);
-	      r = s(5);
-	    }
-	    if (!data[2] || !data[2].end) {
-	      ctx.arc(xScale(data[0]), yScale(data[1]), r, 0, s(2 * Math.PI), false);
-	    }
-	    ctx.fill();
-	    ctx.stroke();
+	    // ctx.beginPath();
+	    // ctx.lineWidth = s(2);
+	    // var r = s(3);
+	    // if (data[2] && data[2].focus) {
+	    //   ctx.lineWidth = s(3);
+	    //   r = s(5);
+	    // }
+	    // if (!data[2] || !data[2].end) {
+	    //   ctx.arc(xScale(data[0]), yScale(data[1]), r, 0, s(2 * Math.PI), false);
+	    // }
+	    // ctx.fill();
+	    // ctx.stroke();
 
 	    // Draw text
-	    ctx.fillStyle = '#ddd';
-	    ctx.font = fontSize + 'px Menlo, monospace';
-	    ctx.textAlign = 'center';
-	    if (!data[2] || !data[2].end) {
-	      ctx.fillText(data[0], xScale(data[0]), chartHeight + margin);
-	    }
+	    // ctx.fillStyle = '#ddd';
+	    // ctx.font = fontSize + 'px Menlo, monospace';
+	    // ctx.textAlign = 'center';
+	    // if (!data[2] || !data[2].end) {
+	    //   ctx.fillText(data[0], xScale(data[0]), chartHeight + margin);
+	    // }
 	  });
 	}
 
